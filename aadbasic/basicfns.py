@@ -1,8 +1,18 @@
 import numpy as np
 import librosa
 import resampy
+import pickle
 import scipy.io.wavfile as wavfile
 from scipy.signal import butter, lfilter, filtfilt
+
+def save_obj(tardir, name, obj ):
+    with open(tardir + name + '.pkl', 'wb+') as f:
+        pickle.dump(obj, f, pickle.HIGHEST_PROTOCOL)
+
+def load_obj(tardir, name):
+    with open(tardir + name + '.pkl', 'rb+') as f:
+        return pickle.load(f)
+
 def butter_bandpass(lowcut, highcut, fs, order=5):
     nyq = 0.5 * fs
     low = lowcut / nyq
