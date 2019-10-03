@@ -29,4 +29,10 @@ def envextract(wavfilename, envtype='power'):
         envelope_audio = resampy.resample(envelope_audio, fs_down_1, fs_inter)
         envelope = butter_bandpass_filter(envelope_audio, fl, fh, fs_inter, 6)        
         envelope = resampy.resample(envelope, fs_inter, fs_target)
-        return [envelope]
+        envdict = {
+            "envelope" : envelope,
+            "Fs" : fs_target,
+            "powerlaw": True,
+            "subbands": False
+        }
+        return envdict
